@@ -1,0 +1,32 @@
+{
+  "name": "my_package",
+  "version": "1.0.0",
+  "description": "package for homework #1",
+  "main": "main",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "console.log(\"testing1\")"
+  },
+  "repository": {
+    "type": "git",
+    "url": "homework #01"
+  },
+  "keywords": [
+    "hi"
+  ],
+  "author": "hi",
+  "license": "BSD-3-Clause",
+  "devDependencies": {
+    "chai": "^4.3.8",
+    "eslint": "^8.49.0",
+    "eslint-plugin-mocha": "^10.1.0",
+    "mocha": "^10.2.0"
+  },
+  "dependencies": {
+    "clear": "^0.1.0",
+    "readline-sync": "^1.4.10"
+  }
+}

@@ -193,6 +193,7 @@ describe('cards', () => {
     });
   });
   
+  */
 
   describe('handToString', () => {
     it('displays an array of cards as double-space separated rank and suit strings (no space between rank and suit) by default', () => {
@@ -340,6 +341,7 @@ describe('cards', () => {
     });
   });
   
+*/
 
   describe('matchesAnyProperty', () => {
     it('returns true if any prop and value pair in obj matches any prop and value pair in matchObj (in this case, matches suit)', () => {
@@ -357,6 +359,8 @@ describe('cards', () => {
       expect(cards.matchesAnyProperty({suit: HEARTS, rank: 'A'}, matchObj)).to.be.false;
     });
   });
+
+  
 
   describe('drawUntilPlayable', () => {
     it('draws card from deck until an 8... or rank or suit is matched (in this case, match suit)', () => {

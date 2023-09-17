@@ -63,7 +63,7 @@ describe('cards', () => {
     });
   });
 
-/*
+
   describe('shuffle', () => {
     it('has the same cards, but different order', () => {
       const originalDeck = cards.generateDeck();
@@ -81,6 +81,7 @@ describe('cards', () => {
       expect(originalDeck).to.deep.equal(beforeShuffle);
     });
   });
+
 
 
   describe('draw', () => {
@@ -121,6 +122,8 @@ describe('cards', () => {
       expect(originalDeck).to.deep.equal(beforeDraw);
     });
   });
+
+  
 
   describe('deal', () => {
     it('defaults to two hands, each with five cards', () => {

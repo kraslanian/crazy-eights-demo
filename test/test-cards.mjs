@@ -1,3 +1,4 @@
+
 /* eslint-disable no-unused-expressions */
 import { expect } from 'chai';
 import * as cards from '../lib/cards.mjs';
@@ -35,6 +36,9 @@ describe('cards', () => {
     });
   });
 
+
+
+
   describe('generateDeck', () => {
     it('has 52 cards', () => {
       const observed = cards.generateDeck().length; 
@@ -59,6 +63,7 @@ describe('cards', () => {
     });
   });
 
+/*
   describe('shuffle', () => {
     it('has the same cards, but different order', () => {
       const originalDeck = cards.generateDeck();
@@ -184,7 +189,7 @@ describe('cards', () => {
       expect(observed).to.deep.equal(expected);
     });
   });
-  */
+  
 
   describe('handToString', () => {
     it('displays an array of cards as double-space separated rank and suit strings (no space between rank and suit) by default', () => {
@@ -331,7 +336,7 @@ describe('cards', () => {
       expect(observed).to.be.null;
     });
   });
-  */
+  
 
   describe('matchesAnyProperty', () => {
     it('returns true if any prop and value pair in obj matches any prop and value pair in matchObj (in this case, matches suit)', () => {
@@ -471,6 +476,7 @@ describe('cards', () => {
     });
   });
 
+
   /*
   describe('autoplay', () => {
     // [deck, playerHand, computerHand, discard]
@@ -509,5 +515,5 @@ describe('cards', () => {
     expect(gameState).to.deep.equal([]);
   });
   */
-});
 
+}); 

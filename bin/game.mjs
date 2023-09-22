@@ -19,6 +19,7 @@ let computerHand = null;
 let nextPlay = null; 
 let discardPile = [];
 let cardsInDeck = 0;
+let win = false;
 
 
 
@@ -36,7 +37,24 @@ console.log("");
 
 */
 
+
+//while win ==  false
 //game state:
+
+let chosenCard = null;
+let drawResult = null;
+let chosenNumber = null;
+let chosenSuit = null;
+let eightOLdSuit = null;
+
+
+
+while (win == false){
+
+    let newCard = {
+        "rank": '',
+        "suit": ''
+    }
 
 clear();
 
@@ -54,15 +72,6 @@ console.log("-----------------------------------------------");
 
 console.log("😊 Player's turn...");
 
-let chosenCard = null;
-let drawResult = null;
-let chosenNumber = null;
-let chosenSuit = null;
-let eightOLdSuit = null;
-let newCard = {
-    "rank": '',
-    "suit": ''
-}
 
 
 
@@ -88,6 +97,14 @@ if (cards.matchesAnyProperty(playerHand, nextPlay)){
 
 } else {
     console.log("😔 You have no playable cards");
+
+    if (deck.length == 0){
+
+        console.log("");
+        console.log("It's a draw.");
+        return;
+    } 
+
     function pauseProgramForDraw() {
         question('Press ENTER to draw cards until matching: ');}
 
@@ -99,8 +116,19 @@ if (cards.matchesAnyProperty(playerHand, nextPlay)){
     console.log(nextPlay.rank + ", " + nextPlay.suit + " , " + "8");
     console.log(".");
 
+
+
     process.stdout.write("Cards drawn: ");
+
+    
     while (newCard.suit != nextPlay.suit && newCard.rank != nextPlay.rank && newCard.rank != 8) {
+
+        if (deck.length == 0){
+
+            console.log("");
+            console.log("It's a draw");
+            return;
+        }
     drawResult = cards.draw(deck);
     deck = drawResult[0];
     newCard = drawResult[1][0];
@@ -109,6 +137,7 @@ if (cards.matchesAnyProperty(playerHand, nextPlay)){
     playerHand.push(newCard);    
     }
     chosenCard = newCard;
+
     /*
     if (chosenCard.rank === 8){
         playerHand.pop();
@@ -125,7 +154,7 @@ if (chosenCard.rank == 8){
     console.log(">");
 
     const input2 = question('');
-    chosenNumber = parseInt(input2);
+    chosenSuit = parseInt(input2);
 
     eightOLdSuit = chosenCard.suit;
 
@@ -148,9 +177,19 @@ if (chosenCard.rank == 8){
         playerHand = playerHand.filter(card => !(card.suit === eightOLdSuit));
 
     } else { playerHand = playerHand.filter(card => !(card.suit === chosenCard.suit && card.rank === chosenCard.rank)); }//remove played card from hand
+    
+    console.log("");
     process.stdout.write("Card played: " + chosenCard.rank + chosenCard.suit);
     nextPlay.suit = chosenCard.suit;
     nextPlay.rank = chosenCard.rank;
+
+    if(playerHand.length == 0 && deck.length == 0){
+        console.log("");
+        console.log("Congradulations! You won.");
+        win = true;
+        return;
+        
+    }
 
     console.log("");
     function pauseProgram() {
@@ -213,7 +252,7 @@ if (cards.matchesAnyProperty(computerHand, nextPlay)){
     computerChoice.rank = computerOptions[0].rank;
     computerHand = computerHand.filter(card => !(card.suit === computerChoice.suit && card.rank === computerChoice.rank)); 
 
-    if (computerChoice.rank === 8){
+    if (computerChoice.rank == 8){
 
         computerChoice.suit = chosenCard.suit;
         console.log("Computer played an 8. The chosen suit is " + computerChoice.suit);
@@ -230,7 +269,21 @@ if (cards.matchesAnyProperty(computerHand, nextPlay)){
     //console.log(" test - inside else ");
 
     console.log("Computer has no playable card. It will draw cards until it gets a playable one.");
-    while (newComputerCard.suit != nextPlay.suit && newComputerCard.rank != nextPlay.rank && newComputerCard.rank !== 8) {
+    if (deck.length == 0){
+
+        console.log("");
+        console.log("It's a draw");
+        return;
+    } 
+    while (newComputerCard.suit != nextPlay.suit && newComputerCard.rank != nextPlay.rank && newComputerCard.rank !== '8') {
+
+        if (deck.length == 0){
+
+            console.log("");
+            console.log("It's a draw");
+            return;
+        } 
+        
         computerDrawResult = cards.draw(deck);
         deck = computerDrawResult[0];
         newComputerCard = computerDrawResult[1][0];
@@ -248,7 +301,7 @@ if (cards.matchesAnyProperty(computerHand, nextPlay)){
 nextPlay.rank = computerChoice.rank;
 nextPlay.suit = computerChoice.suit;
 
-if (computerChoice.rank === 8){
+if (computerChoice.rank === '8'){
 
     computerChoice.suit = chosenCard.suit;
     console.log("Computer played an 8. The chosen suit is " + computerChoice.suit);
@@ -260,9 +313,6 @@ console.log("Computer played " + computerChoice.rank + computerChoice.suit);
 }
 
 console.log("");
-function pauseProgram() {
-    question('Press Enter to continue...');
-}
 
 pauseProgram();
 
@@ -285,7 +335,14 @@ console.log("😊✋ (player hand): " + cards.handToString(playerHand));
 console.log("-----------------------------------------------");
 
 
+if (computerHand.length == 0 && deck.length == 0){
+    console.log("");
+    console.log("Game over. Computer won.");
+    return;
+}
 
+
+}
 
 }
 

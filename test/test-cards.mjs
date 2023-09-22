@@ -12,7 +12,7 @@ const SUITS_ARRAY = [SPADES, HEARTS, CLUBS, DIAMONDS];
 // * playing 8 allows choosing of rank or suit
 // * computer plays 8, sets
 // * computer play after 8
-// * player play after 8
+// * player play after 8  
 // * computer win
 // * human win
 // * read json to set up decks

@@ -26,15 +26,19 @@ function interactiveGame(){
 
  // the interactive game
 
+ /*
+
 console.log(" deck =", deck );
 console.log(" playerHand =", playerHand);
 console.log(" computerHand=", computerHand);
 console.log(" nextPlay =", nextPlay);
 console.log("");
 
-
+*/
 
 //game state:
+
+clear();
 
 console.log("              CR🤪ZY 8's");
 console.log("-----------------------------------------------");
@@ -176,11 +180,14 @@ console.log("-----------------------------------------------");
 
 console.log("😊 Computer's turn ...");
 
-/*
+
 
 //computer turn
 
-let computerChoice = null;
+let computerChoice = {
+    "rank": '',
+    "suit": ''
+}
 let computerOptions = [];
 let newComputerCard = {
     "rank": '',
@@ -193,13 +200,14 @@ let computerDrawResult = null;
 
 if (cards.matchesAnyProperty(computerHand, nextPlay)){
 
+    //console.log(" test - inside if matches property");
 
-    for (let k = 0; k < computerHand.length; k++){
 
-        computerOptions = computerHand.filter(card => (card.suit === nextPlay.suit || card.rank === nextPlay.rank || card.rank === 8)); 
+    
+    computerOptions = computerHand.filter(card => (card.suit === nextPlay.suit || card.rank === nextPlay.rank || card.rank === 8)); 
 
-        console.log( "options are" + computerOptions);
-    }
+        //console.log( "options are" + computerOptions);
+
 
     computerChoice.suit = computerOptions[0].suit;
     computerChoice.rank = computerOptions[0].rank;
@@ -215,10 +223,14 @@ if (cards.matchesAnyProperty(computerHand, nextPlay)){
     nextPlay.rank = computerChoice.rank;
     nextPlay.suit = computerChoice.suit;
 
+    //console.log(" test - end of  if matches property");
+
 } else {
 
+    //console.log(" test - inside else ");
+
     console.log("Computer has no playable card. It will draw cards until it gets a playable one.");
-    while (newComputerCard.suit != nextPlay.suit && newComputerCard.rank != nextPlay.rank && newComputerCard.rank != 8) {
+    while (newComputerCard.suit != nextPlay.suit && newComputerCard.rank != nextPlay.rank && newComputerCard.rank !== 8) {
         computerDrawResult = cards.draw(deck);
         deck = computerDrawResult[0];
         newComputerCard = computerDrawResult[1][0];
@@ -226,20 +238,54 @@ if (cards.matchesAnyProperty(computerHand, nextPlay)){
         process.stdout.write(newComputerCard.rank + newComputerCard.suit + "  ");
         computerHand.push(newComputerCard);    
         }
-        computerChoice = newComputerCard;
-        if (computerChoice.rank === 8){
-
-            computerChoice.suit = chosenCard.suit;
-            console.log("Computer played an 8. The chosen suit is " + computerChoice.suit);
+    computerChoice = newComputerCard;
+    computerHand.pop();
     
-        }
     
-        nextPlay.rank = computerChoice.rank;
-        nextPlay.suit = computerChoice.suit;
 
 }
 
-*/
+nextPlay.rank = computerChoice.rank;
+nextPlay.suit = computerChoice.suit;
+
+if (computerChoice.rank === 8){
+
+    computerChoice.suit = chosenCard.suit;
+    console.log("Computer played an 8. The chosen suit is " + computerChoice.suit);
+
+} else {
+    console.log();
+console.log("Computer played " + computerChoice.rank + computerChoice.suit);
+
+}
+
+console.log("");
+function pauseProgram() {
+    question('Press Enter to continue...');
+}
+
+pauseProgram();
+
+
+
+clear();
+
+
+console.log("");
+
+console.log("              CR🤪ZY 8's");
+console.log("-----------------------------------------------");
+console.log("Next suit/rank to play: ➡️  " + nextPlay.rank + nextPlay.suit + "  ⬅️");
+console.log("-----------------------------------------------");
+console.log("Top of discard pile: " + nextPlay.rank + nextPlay.suit);
+console.log("Number of cards left in deck: " + cardsInDeck);
+console.log("-----------------------------------------------");
+console.log("🤖✋ (computer hand): " + cards.handToString(computerHand));
+console.log("😊✋ (player hand): " + cards.handToString(playerHand));
+console.log("-----------------------------------------------");
+
+
+
 
 }
 
@@ -282,7 +328,7 @@ if (process.argv.length >= 3){ //if json file is supplied
 
 } else { //if no JSON file was provided
 
-    console.log("test");
+    //console.log("test");
     deck = cards.shuffle(cards.generateDeck());
     let handsAndNewDeckObject = cards.deal(deck);
     deck = handsAndNewDeckObject.deck; //new deck with dealt hands removed

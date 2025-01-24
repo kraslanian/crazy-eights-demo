@@ -22,18 +22,20 @@ This project is a demo of the card game Crazy Eights, simulating two turns (play
    git clone git@github.com:your-username/crazy_eights_demo.git
 
 2. Navigate to the project directory:
-cd crazy_eights_demo
+   ```bash
+   cd crazy_eights_demo
 
 3. Install dependencies:
-npm install
+   ```bash
+   npm install
 
 4. Run the game:
-node game.mjs
+   ```bash
+   node game.mjs
 
 ## How to Test
-
 Run the included unit tests:
-
-npx mocha
+   ```bash  
+   npx mocha
 
 

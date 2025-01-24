@@ -1,5 +1,4 @@
-//kraslanian
-//Homework #01 - Crazy Eights
+
 # Crazy Eights Demo
 
 ## Overview
